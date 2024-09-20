@@ -21,19 +21,15 @@ RUN curl -fsSL https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo -o /etc/yu
     microdnf clean all && \
     setcap -r /usr/bin/vault
 
+# Update Python's pip
+RUN python3 -m pip install --upgrade pip && \
+    pip install ansible-tower-cli
+
 # Verify installations
 RUN mc --version && \
     oc version && \
-    vault --version
-
-# Update Python's pip
-RUN python3 -m pip install --upgrade pip
-
-# Install ansible-tower-cli
-RUN pip install ansible-tower-cli
-
-# Verify tower-cli installation
-RUN tower-cli --version && \
+    vault --version && \
+    tower-cli --version && \
     whereis tower-cli
 
 # Set default command
