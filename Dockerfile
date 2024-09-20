@@ -23,14 +23,14 @@ RUN curl -fsSL https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo -o /etc/yu
 
 # Update Python's pip
 RUN python3 -m pip install --upgrade pip && \
-    pip install ansible-tower-cli
+    pip install awxkit
 
 # Verify installations
 RUN mc --version && \
     oc version && \
     vault --version && \
-    tower-cli --version && \
-    whereis tower-cli
+    awx --version && \
+    whereis awx
 
 # Set default command
 CMD ["/bin/bash"]
